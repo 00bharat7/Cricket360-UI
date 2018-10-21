@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
+import Home from '../home/Home';
 
 export default class Login extends Component {
   constructor(props) {
@@ -16,6 +17,10 @@ export default class Login extends Component {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
+  state = {
+    toDashboard: false,
+  }
+
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
@@ -24,9 +29,16 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    alert('email = '+this.state.email);
+    this.setState(() => ({
+      toDashboard: true
+    }))
   }
 
   render() {
+    if (this.state.toDashboard === true) {
+      return(<Home />);
+    }
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>

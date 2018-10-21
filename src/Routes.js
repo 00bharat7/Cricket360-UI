@@ -1,3 +1,3 @@
-import Login from "./containers/Login";
+import Login from "./login/Login";
 
 <Route path="/login" exact component={Login} />
