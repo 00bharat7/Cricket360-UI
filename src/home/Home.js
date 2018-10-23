@@ -6,14 +6,21 @@ export default class Home extends Component{
     constructor () {
         super()
         this.state = {
-          username: ''
+          players: []
         }
         this.handleClick = this.handleClick.bind(this)
     }
   
     handleClick () {
-      axios.get('https://api.github.com/users/maecapozzi')
-        .then(response => this.setState({username: response.data.name}))
+      axios.get('http://localhost:9000/players', {
+        crossorigin: true,
+        responseType: 'json',
+       })
+        .then(response => {   
+            //console.log("response = "+response.data)
+            const players = response.data.players
+            this.setState({ players })})
+        .catch(err => console.log(err))
         
     }
 
@@ -22,7 +29,9 @@ export default class Home extends Component{
         return(
             <div className='button__container'>
         <button className='button' onClick={this.handleClick}>Click Me</button>
-        <p>{this.state.username}</p>
+        <ul>
+        { this.state.players.map(player => <li>{player.playerId}</li>)}
+      </ul>
       </div>
         );
     }

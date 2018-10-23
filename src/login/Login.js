@@ -29,7 +29,7 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    alert('email = '+this.state.email);
+    //alert('email = '+this.state.email);
     this.setState(() => ({
       toDashboard: true
     }))
